@@ -1,0 +1,37 @@
+/* Small window styles */
+body {
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    border-radius: 20px; /* Rounded corners */
+    overflow: hidden; /* Hide scrollbars */
+}
+
+#widget {
+    /* Background Color Managed by SmallWindow Class */
+    width: 100%; /* Fill the main window */
+    height: 100%; /* Fill the main window */
+    border-radius: 20px; /* Rounded corners */
+    overflow: hidden; /* Prevent content overflow */
+    -webkit-app-region: drag; /* Enable dragging when unlocked */
+}
+
+#widget.locked {
+    -webkit-app-region: no-drag; /* Disable dragging when locked */
+}
+
+.lock-icon {
+    position: absolute;
+    height: 24px;
+    background: url('../assets/padlock-icon.png') no-repeat center center;
+    background-size: contain;
+    display: none; /* Hidden by default */
+    pointer-events: none; /* Prevent interactions with the icon */
+}
+
+.locked {
+    top: 10px;
+    right: 10px;
+    width: 24px;
+    pointer-events: none; /* Disable interactions */
+}

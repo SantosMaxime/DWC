@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Window</title>
+    <link rel="stylesheet" href="css/main-styles.css">
+    <link rel="stylesheet" href="node_modules/@simonwep/pickr/dist/themes/classic.min.css">
+    <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+</head>
+<body>
+    <div id="title-bar">
+        <div id="title">Desktop Widget Controller</div>
+        <div id="window-buttons">
+            <button id="minimize-button" class="window-button">—</button>
+            <button id="maximize-button" class="window-button">⬜</button>
+            <button id="close-button" class="window-button">✖</button>
+        </div>
+    </div>
+
+    <div id="nav-bar">
+        <button id="home-button" class="nav-button">Home</button>
+        <button id="small-windows-button" class="nav-button">Small Windows</button>
+    </div>
+
+    <div id="content">
+        <div id="home-page">
+            <h1>Custom Window</h1>
+            <p>This is a frameless main window with custom buttons.</p>
+            <button id="transparent-theme">Enable Transparent Theme</button>
+            <button id="default-theme">Enable Default Theme</button>
+        </div>
+        <div id="small-windows-page" style="display: none;">
+            <h2>Small Windows</h2>
+            <div id="small-windows-list"></div>
+        </div>
+    </div>
+
+    <script src="js/main-renderer.js"></script>
+    <script src="node_modules/@simonwep/pickr/dist/pickr.min.js"></script>
+</body>
+</html>
