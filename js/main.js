@@ -6,7 +6,20 @@ const SmallWindow = require('./SmallWindow');
 let tray = null;
 let mainWindow = null;
 let smallWindows = [];
+const widgets = [];
 const stateFilePath = path.join(app.getPath('userData'), 'window-state.json');
+
+const createWidget = (name, type) => {
+    const widget = { name, type };
+    widgets.push(widget);
+    updateWidgetsPage();
+};
+
+const updateWidgetsPage = () => {
+    if (mainWindow) {
+        mainWindow.webContents.send('update-widgets', widgets);
+    }
+};
 
 app.on('ready', () => {
     tray = new Tray(path.join(__dirname, '../assets/icon.png'));
@@ -120,6 +133,14 @@ app.on('ready', () => {
             createSmallWindow();
         }
     };
+
+    ipcMain.on('create-widget', (event, name, type) => {
+        createWidget(name, type);
+    });
+
+    ipcMain.on('get-widgets', (event) => {
+        event.sender.send('update-widgets', widgets);
+    });
 
     ipcMain.on('toggle-lock-window', (event, index) => {
         if (smallWindows[index]) {

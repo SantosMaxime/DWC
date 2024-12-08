@@ -108,3 +108,26 @@ button {
     color: red;
     margin-left: 10px;
 }
+
+#widgets-page {
+    padding: 20px;
+    color: #fff;
+}
+
+.widget-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background: #272727;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+}
+
+.widget-item button {
+    margin-left: 10px;
+}
+
+.widgets-title {
+    color: #ffffff;
+}

@@ -45,6 +45,38 @@ ipcRenderer.on('update-small-windows', (event, windows) => {
     }
 });
 
+ipcRenderer.on('update-widgets', (event, widgets) => {
+    const list = document.getElementById('widgets-list');
+    list.innerHTML = ''; // Clear the list
+
+    if (widgets.length === 0) {
+        list.innerHTML = '<div class="empty-list">No widgets available</div>';
+    } else {
+        widgets.forEach((widget, index) => {
+            const item = document.createElement('div');
+            item.className = 'widget-item';
+            item.innerHTML = `
+                <span>${widget.name} (${widget.type})</span>
+                <button onclick="connectToSpotify(${index})">Connect to Spotify</button>
+            `;
+            list.appendChild(item);
+        });
+    }
+});
+
+ipcRenderer.on('spotify-auth-success', (event, token) => {
+    console.log('Spotify authentication successful, access token:', token);
+    // Store the access token for future use
+});
+
+ipcRenderer.on('spotify-auth-failure', (event, error) => {
+    console.error('Spotify authentication failed:', error);
+});
+
+function connectToSpotify(index) {
+    ipcRenderer.send('connect-to-spotify', index);
+}
+
 function toggleLock(index) {
     ipcRenderer.send('toggle-lock-window', index);
     ipcRenderer.once('lock-toggled', (event, isLocked) => {
@@ -95,4 +127,10 @@ document.getElementById('home-button').addEventListener('click', () => {
 document.getElementById('small-windows-button').addEventListener('click', () => {
     document.getElementById('home-page').style.display = 'none';
     document.getElementById('small-windows-page').style.display = 'block';
+});
+
+document.getElementById('widgets-button').addEventListener('click', () => {
+    document.getElementById('home-page').style.display = 'none';
+    document.getElementById('small-windows-page').style.display = 'none';
+    document.getElementById('widgets-page').style.display = 'block';
 });
